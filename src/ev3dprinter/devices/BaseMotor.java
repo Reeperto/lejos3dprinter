@@ -12,9 +12,10 @@ public class BaseMotor {
 
     Boolean invert;
 
-    float pos;
+    float position;
     float offset;
     float studRot;
+    float studDeg;
     float defaultSpeed;
 
     // Used to invert angle inputs and rotation commands to match the motor's orientation.
@@ -29,10 +30,13 @@ public class BaseMotor {
             this.v = -1f;
         }
 
-        this.pos = 0f;
         this.invert = inverted;
+        this.position = 0f;
         this.offset = 0f;
+
         this.studRot = rotRatio;
+        this.studDeg = 360f * rotRatio;
+
         this.defaultSpeed = defaultSpeed;
         this.m.setSpeed(defaultSpeed);
 
@@ -54,6 +58,16 @@ public class BaseMotor {
         touchSensor.waitUntilPressed();
 
         this.m.stop();
+
+    }
+
+    public void gotoPosition(float pos, float speed) {
+
+        int deltaDeg = Math.round((pos - this.position) * studDeg);
+
+        this.m.setSpeed(speed);
+        this.m.rotate(deltaDeg);
+        this.m.setSpeed(defaultSpeed);
 
     }
 
