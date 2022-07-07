@@ -5,9 +5,7 @@ import lejos.hardware.port.Port;
 
 public class XMotor extends BaseMotor {
 
-    public XMotor(Port motorAddress, Port sensorAddress, float rotRatio, float defaultSpeed, Boolean inverted) {
-        super(motorAddress, sensorAddress, rotRatio, defaultSpeed, inverted);
+    public XMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted) {
+        super(motorAddress, sensorAddress, degRatio, defaultSpeed, inverted);
     }
-
-
 }

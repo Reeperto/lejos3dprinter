@@ -2,9 +2,9 @@ package ev3dprinter.interfaces;
 
 public class PrintHead {
 
-    XMotor xAxisMotor;
-    YMotor yAxisMotor;
-    ZMotor zAxisMotor;
+    final XMotor xAxisMotor;
+    final YMotor yAxisMotor;
+    final ZMotor zAxisMotor;
 
     public PrintHead(XMotor xAxisMotor, YMotor yAxisMotor, ZMotor zAxisMotor) {
         this.xAxisMotor = xAxisMotor;

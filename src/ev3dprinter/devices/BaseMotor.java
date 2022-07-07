@@ -6,22 +6,22 @@ import lejos.utility.Delay;
 
 public class BaseMotor {
 
-    TouchSensor touchSensor;
+    final TouchSensor touchSensor;
 
-    EV3LargeRegulatedMotor m;
+    final EV3LargeRegulatedMotor m;
 
-    Boolean invert;
+    final Boolean invert;
 
-    float position;
-    float offset;
-    float studRot;
+    final float position;
+    final float offset;
+    final float mmDegRatio;
     float studDeg;
-    float defaultSpeed;
+    final float defaultSpeed;
 
     // Used to invert angle inputs and rotation commands to match the motor's orientation.
     float v = 1f;
 
-    public BaseMotor(Port motorAddress, Port sensorAddress, float rotRatio, float defaultSpeed, Boolean inverted) {
+    public BaseMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted) {
 
         this.m = new EV3LargeRegulatedMotor(motorAddress);
         this.touchSensor = new TouchSensor(sensorAddress);
@@ -34,8 +34,7 @@ public class BaseMotor {
         this.position = 0f;
         this.offset = 0f;
 
-        this.studRot = rotRatio;
-        this.studDeg = 360f * rotRatio;
+        this.mmDegRatio = degRatio;
 
         this.defaultSpeed = defaultSpeed;
         this.m.setSpeed(defaultSpeed);

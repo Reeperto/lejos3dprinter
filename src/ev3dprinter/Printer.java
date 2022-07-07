@@ -9,11 +9,16 @@ import lejos.hardware.port.SensorPort;
 
 public class Printer {
 
-    static float motorSpeed = 360f;
+    static final int motorSpeed = 360;
 
-    static XMotor xAxisMotor = new XMotor(MotorPort.A, SensorPort.S1, 0.3125f, motorSpeed, false);
-    static YMotor yAxisMotor = new YMotor(MotorPort.B, SensorPort.S2, 1f / 9f, motorSpeed, false);
-    static ZMotor zAxisMotor = new ZMotor(MotorPort.C, SensorPort.S3, 2f / 3f, motorSpeed, false);
+    // Ratio of degrees per millimeter for each motor
+    static final float xMillimeterRatio = 14.0625f;
+    static final float yMillimeterRatio = 5f;
+    static final float zMillimeterRatio = 240f;
+
+    static final XMotor xAxisMotor = new XMotor(MotorPort.A, SensorPort.S1, xMillimeterRatio, motorSpeed, false);
+    static final YMotor yAxisMotor = new YMotor(MotorPort.B, SensorPort.S2, yMillimeterRatio, motorSpeed, false);
+    static final ZMotor zAxisMotor = new ZMotor(MotorPort.C, SensorPort.S3, zMillimeterRatio, motorSpeed, false);
 
     static PrintHead printHead = new PrintHead(xAxisMotor, yAxisMotor, zAxisMotor);
 
