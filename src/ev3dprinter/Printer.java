@@ -10,8 +10,8 @@ public class Printer {
 
     static final int mainSpeed = 360;
 
-    static final int xSpeed = mainSpeed;
-    static final int ySpeed = Math.round(0.5f * mainSpeed);
+    static final int xSpeed = Math.round(0.5f * mainSpeed);
+    static final int ySpeed = mainSpeed;
     static final int zSpeed = 2 * mainSpeed;
 
 
@@ -29,6 +29,8 @@ public class Printer {
         xAxisMotor.calibrate();
         yAxisMotor.calibrate();
         zAxisMotor.calibrate();
+
+        xAxisMotor.gotoPosition(8 * 10f, xAxisMotor.defaultSpeed);
 
     }
 

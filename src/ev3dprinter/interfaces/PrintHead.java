@@ -1,5 +1,7 @@
 package ev3dprinter.interfaces;
 
+// TODO make a synchronous calibration function for all motors
+
 public class PrintHead {
 
     final XMotor xAxisMotor;

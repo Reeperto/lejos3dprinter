@@ -8,7 +8,7 @@ public class XMotor extends BaseMotor {
 
     public XMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted, Boolean ev3) {
         super(motorAddress, sensorAddress, degRatio, defaultSpeed, inverted, ev3);
-        super.offset = 96f;
+        super.offset = 104f;
     }
 
 }
