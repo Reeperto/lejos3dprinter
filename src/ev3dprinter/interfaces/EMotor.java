@@ -33,7 +33,9 @@ public class EMotor {
 
     }
 
-    public void resetPos() { this.position = 0; }
+    public void resetPos() {
+        this.position = 0;
+    }
 
     public float convertFeedSpeed(float fSpeed, float materialDiameter, float layerHeight, float nozzleDiameter) {
 

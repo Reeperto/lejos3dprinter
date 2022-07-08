@@ -11,12 +11,10 @@ public class BaseMotor {
     public final EV3LargeRegulatedMotor m;
 
     public final Boolean invert;
-
-    public float position;
-    public float offset;
     public final float mmDegRatio;
     public final float defaultSpeed;
-
+    public float position;
+    public float offset;
     // Used to invert angle inputs and rotation commands to match the motor's orientation.
     float v = 1f;
 
@@ -67,7 +65,6 @@ public class BaseMotor {
     }
 
     public void home() {
-
 
 
     }

@@ -17,7 +17,6 @@ public class PrintHead {
     public void calibrate() {
 
 
-
     }
 
     public void gotoPoint(float x, float y, float z) {

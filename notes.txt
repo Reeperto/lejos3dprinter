@@ -1,0 +1,5 @@
+## GEAR RATIOS
+
+x-Axis :
+y-Axis : Direct -> 0.3125 rot/stud
+z-Axis :

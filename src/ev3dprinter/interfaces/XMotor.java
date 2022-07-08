@@ -2,7 +2,6 @@ package ev3dprinter.interfaces;
 
 import ev3dprinter.devices.BaseMotor;
 import lejos.hardware.port.Port;
-import lejos.utility.Delay;
 
 public class XMotor extends BaseMotor {
 

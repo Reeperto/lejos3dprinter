@@ -14,7 +14,7 @@ public class TouchSensor extends AnalogSensor {
     }
 
     public Boolean isPressed() {
-        if(ev3) {
+        if (ev3) {
             return this.port.getPin6() > 2.5F;
         } else {
             return this.port.getPin1() < 2.5F;
@@ -23,7 +23,7 @@ public class TouchSensor extends AnalogSensor {
 
     public void waitUntilReleased() {
 
-        while(this.isPressed()) {
+        while (this.isPressed()) {
 
             Delay.msDelay(10);
 
