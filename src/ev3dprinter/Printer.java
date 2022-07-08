@@ -1,5 +1,6 @@
 package ev3dprinter;
 
+import ev3dprinter.interfaces.EMotor;
 import ev3dprinter.interfaces.XMotor;
 import ev3dprinter.interfaces.YMotor;
 import ev3dprinter.interfaces.ZMotor;
@@ -23,14 +24,13 @@ public class Printer {
     static final XMotor xAxisMotor = new XMotor(MotorPort.A, SensorPort.S1, xMillimeterRatio, xSpeed, false, false);
     static final YMotor yAxisMotor = new YMotor(MotorPort.B, SensorPort.S2, yMillimeterRatio, ySpeed, false, true);
     static final ZMotor zAxisMotor = new ZMotor(MotorPort.C, SensorPort.S3, zMillimeterRatio, zSpeed, true, false);
+    static final EMotor eAxisMotor = new EMotor(MotorPort.D, (float) mainSpeed);
 
     public static void main(String[] args) {
 
         xAxisMotor.calibrate();
         yAxisMotor.calibrate();
         zAxisMotor.calibrate();
-
-        xAxisMotor.gotoPosition(8 * 10f, xAxisMotor.defaultSpeed);
 
     }
 
