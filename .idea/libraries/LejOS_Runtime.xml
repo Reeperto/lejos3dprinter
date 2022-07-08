@@ -1,15 +1,16 @@
 <component name="libraryTable">
   <library name="LejOS Runtime">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/ev3/ev3classes.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/ev3/dbusjava.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/pc/ev3tools.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/pc/3rdparty/jsch-0.1.50.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/pc/3rdparty/jfreechart.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/pc/3rdparty/jcommon.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libraries/leJOSEV3/lib/pc/3rdparty/commons-cli.jar!/" />
+      <root url="file://$USER_HOME$/Documents/Dev/lib/ev3" />
+      <root url="file://$USER_HOME$/Documents/Dev/lib/pc" />
+      <root url="file://$USER_HOME$/Documents/Dev/lib/ev3/3rdparty" />
+      <root url="file://$USER_HOME$/Documents/Dev/lib/pc/3rdparty" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Documents/Dev/lib/ev3" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Documents/Dev/lib/ev3/3rdparty" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Documents/Dev/lib/pc" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Documents/Dev/lib/pc/3rdparty" recursive="false" />
   </library>
 </component>
