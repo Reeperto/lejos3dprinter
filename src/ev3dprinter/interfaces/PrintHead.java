@@ -12,7 +12,13 @@ public class PrintHead {
         this.zAxisMotor = zAxisMotor;
     }
 
-    public void Goto(float x, float y, float z) {
+    public void calibrate() {
+
+
+
+    }
+
+    public void gotoPoint(float x, float y, float z) {
 
     }
 

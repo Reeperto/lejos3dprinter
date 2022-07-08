@@ -6,25 +6,24 @@ import lejos.utility.Delay;
 
 public class BaseMotor {
 
-    final TouchSensor touchSensor;
+    public final TouchSensor touchSensor;
 
-    final EV3LargeRegulatedMotor m;
+    public final EV3LargeRegulatedMotor m;
 
-    final Boolean invert;
+    public final Boolean invert;
 
-    final float position;
-    final float offset;
-    final float mmDegRatio;
-    float studDeg;
-    final float defaultSpeed;
+    public float position;
+    public float offset;
+    public final float mmDegRatio;
+    public final float defaultSpeed;
 
     // Used to invert angle inputs and rotation commands to match the motor's orientation.
     float v = 1f;
 
-    public BaseMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted) {
+    public BaseMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted, Boolean ev3) {
 
         this.m = new EV3LargeRegulatedMotor(motorAddress);
-        this.touchSensor = new TouchSensor(sensorAddress);
+        this.touchSensor = new TouchSensor(sensorAddress, ev3);
 
         if (inverted) {
             this.v = -1f;
@@ -42,37 +41,53 @@ public class BaseMotor {
     }
 
 
-    public void Calibrate() {
+    public void calibrate() {
 
         this.forward();
-
-        touchSensor.waitUntilReleased();
-
-        Delay.msDelay(500);
-
+        this.touchSensor.waitUntilPressed();
         this.m.stop();
-        this.m.setSpeed(defaultSpeed * 0.2f);
+
         this.backward();
-
-        touchSensor.waitUntilPressed();
-
+        this.touchSensor.waitUntilReleased();
+        Delay.msDelay(100);
         this.m.stop();
+
+        this.m.setSpeed(defaultSpeed * 0.2f);
+        this.forward();
+        this.touchSensor.waitUntilPressed();
+        this.m.stop();
+
+        this.m.setSpeed(this.defaultSpeed);
+
+        // Move by inverse offset
+        this.gotoPosition(-this.offset, this.defaultSpeed);
+
+        this.position = 0;
+
+    }
+
+    public void home() {
+
+
 
     }
 
     public void gotoPosition(float pos, float speed) {
 
-        int deltaDeg = Math.round((pos - this.position) * studDeg);
+        int deltaDeg = Math.round((pos - this.position) * this.mmDegRatio);
 
         this.m.setSpeed(speed);
         this.m.rotate(deltaDeg);
+
+        this.position = pos;
         this.m.setSpeed(defaultSpeed);
 
     }
 
     public void forward() {
-        if (invert) {
+        if (this.invert) {
             this.m.backward();
+            return;
         }
 
         this.m.forward();
@@ -80,8 +95,9 @@ public class BaseMotor {
     }
 
     public void backward() {
-        if (invert) {
+        if (this.invert) {
             this.m.forward();
+            return;
         }
 
         this.m.backward();

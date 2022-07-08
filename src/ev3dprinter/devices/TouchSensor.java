@@ -1,46 +1,44 @@
 package ev3dprinter.devices;
 
 import lejos.hardware.port.Port;
-import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.hardware.sensor.AnalogSensor;
 import lejos.utility.Delay;
 
-public class TouchSensor extends EV3TouchSensor {
+public class TouchSensor extends AnalogSensor {
 
-    public TouchSensor(Port port) {
-        super(port);
+    final Boolean ev3;
+
+    public TouchSensor(Port p, Boolean ev3) {
+        super(p);
+        this.ev3 = ev3;
     }
 
     public Boolean isPressed() {
-
-        float[] press = new float[1];
-        super.fetchSample(press, 0);
-
-        return press[0] == 1f;
-
+        if(ev3) {
+            return this.port.getPin6() > 2.5F;
+        } else {
+            return this.port.getPin1() < 2.5F;
+        }
     }
 
-    // Pauses execution until the sensor deactivates
     public void waitUntilReleased() {
 
-        float[] press = new float[1];
-        super.fetchSample(press, 0);
+        while(this.isPressed()) {
 
-        while (press[0] == 1f) {
             Delay.msDelay(10);
-            super.fetchSample(press, 0);
+
         }
+
     }
 
-    // Pauses execution until the sensor activates
     public void waitUntilPressed() {
 
-        float[] press = new float[1];
-        super.fetchSample(press, 0);
+        while (!this.isPressed()) {
 
-        while (press[0] == 0f) {
             Delay.msDelay(10);
-            super.fetchSample(press, 0);
+
         }
+
     }
 
 }

@@ -7,7 +7,7 @@ import lejos.hardware.port.Port;
 // TODO Implement a method to move the print head to a given millimeter height.
 
 public class ZMotor extends BaseMotor {
-    public ZMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted) {
-        super(motorAddress, sensorAddress, degRatio, defaultSpeed, inverted);
+    public ZMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted, Boolean ev3) {
+        super(motorAddress, sensorAddress, degRatio, defaultSpeed, inverted, ev3);
     }
 }
