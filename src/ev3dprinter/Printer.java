@@ -16,7 +16,7 @@ public class Printer {
     static final float yAxisSpeed = mainSpeed;
     static final float zAxisSpeed = 2 * mainSpeed;
 
-    // Ratio variables (Degress per 1 mm movement)
+    // Ratio variables (Degrees per 1 mm movement)
     static final float xRatio = 5f;
     static final float yRatio = 14.0625f;
     static final float zRatio = 240f;

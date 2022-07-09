@@ -1,4 +1,4 @@
 out
 .*
 !.gitignore
-.idea/libraries/
+.idea/
