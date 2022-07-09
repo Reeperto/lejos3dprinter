@@ -1,4 +1,4 @@
-package ev3dprinter.interfaces;
+package ev3dprinter.motors;
 
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.Port;

@@ -9,97 +9,68 @@ public class BaseMotor {
     public final TouchSensor touchSensor;
 
     public final EV3LargeRegulatedMotor m;
-
-    public final Boolean invert;
-    public final float mmDegRatio;
     public final float defaultSpeed;
+    public final float defaultVelocity;
+    public final float degMmRatio;
     public float position;
     public float offset;
-    // Used to invert angle inputs and rotation commands to match the motor's orientation.
-    float v = 1f;
 
-    public BaseMotor(Port motorAddress, Port sensorAddress, float degRatio, int defaultSpeed, Boolean inverted, Boolean ev3) {
+    public BaseMotor(Port port, Port sensorAddress, float defaultSpeed, float degMmRatio, Boolean ev3TouchSensor) {
 
-        this.m = new EV3LargeRegulatedMotor(motorAddress);
-        this.touchSensor = new TouchSensor(sensorAddress, ev3);
-
-        if (inverted) {
-            this.v = -1f;
-        }
-
-        this.invert = inverted;
+        this.m = new EV3LargeRegulatedMotor(port);
+        this.touchSensor = new TouchSensor(sensorAddress, ev3TouchSensor);
+        this.defaultSpeed = -defaultSpeed;
+        this.defaultVelocity = defaultSpeed / degMmRatio;
         this.position = 0f;
         this.offset = 0f;
-
-        this.mmDegRatio = degRatio;
-
-        this.defaultSpeed = defaultSpeed;
-        this.m.setSpeed(defaultSpeed);
+        this.degMmRatio = degMmRatio;
 
     }
 
-
     public void calibrate() {
 
-        this.forward();
+        // Move quickly until near sensor, skip if sensor is already pressed
+        this.m.setSpeed(2f * defaultSpeed);
+        this.m.forward();
         this.touchSensor.waitUntilPressed();
         this.m.stop();
 
-        this.backward();
+        // Move back enough so there is a gap between the sensor
+        this.m.setSpeed(defaultSpeed);
+        this.m.backward();
         this.touchSensor.waitUntilReleased();
         Delay.msDelay(100);
         this.m.stop();
 
-        this.m.setSpeed(defaultSpeed * 0.2f);
-        this.forward();
+        // Move towards sensor slowly until it is pressed and reset position
+        this.m.setSpeed(0.2f * defaultSpeed);
+        this.m.forward();
         this.touchSensor.waitUntilPressed();
         this.m.stop();
 
-        this.m.setSpeed(this.defaultSpeed);
+        // Move to (0,0,0) by axis offset
+        this.gotoPosition(this.offset, 0.8f * this.defaultSpeed);
 
-        // Move by inverse offset
-        this.gotoPosition(-this.offset, this.defaultSpeed);
-
+        // Reset position and motor speed
+        this.m.setSpeed(defaultSpeed);
         this.position = 0;
-
-    }
-
-    public void home() {
-
 
     }
 
     public void gotoPosition(float pos, float speed) {
 
-        int deltaDeg = Math.round((pos - this.position) * this.mmDegRatio);
+        // Convert mm position to degree amount
+        int deltaDeg = Math.round((pos - this.position) * degMmRatio);
 
         this.m.setSpeed(speed);
         this.m.rotate(deltaDeg);
 
+        // Reset motor and update position
+        this.m.setSpeed(this.defaultSpeed);
         this.position = pos;
-        this.m.setSpeed(defaultSpeed);
 
     }
 
-    public void forward() {
-        if (this.invert) {
-            this.m.backward();
-            return;
-        }
-
-        this.m.forward();
-
-    }
-
-    public void backward() {
-        if (this.invert) {
-            this.m.forward();
-            return;
-        }
-
-        this.m.backward();
-
-    }
 
 
 }
