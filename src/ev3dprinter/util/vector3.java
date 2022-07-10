@@ -16,9 +16,24 @@ public class vector3 {
         this.z = z;
     }
 
-    public float magnitude2(vector3 v) {
-        return v.x*v.x + v.y + v.y + v.z + v.z;
+    public float magnitude3() {
+        return this.x*this.x + this.y + this.y + this.z + this.z;
     }
 
+    public float magnitude2() {
+        return this.x*this.x + this.y + this.y;
+    }
+
+    public void invert() {
+        
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        
+    }
+
+    public vector3 sub(vector3 w) {
+        return new vector3(this.x - w.x, this.y - w.y, this.z - w.z);
+    }
 
 }
